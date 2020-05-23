@@ -14,7 +14,7 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    @Autowired // there no need to @Autowired annotation actually.
+    @Autowired // there is no need to @Autowired annotation here actually.
     public DataLoader(OwnerService ownerService, VetService vetService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
