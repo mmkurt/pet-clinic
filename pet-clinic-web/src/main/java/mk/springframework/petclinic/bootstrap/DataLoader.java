@@ -2,7 +2,6 @@ package mk.springframework.petclinic.bootstrap;
 
 import mk.springframework.petclinic.model.*;
 import mk.springframework.petclinic.services.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
