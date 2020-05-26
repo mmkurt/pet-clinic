@@ -1,10 +1,7 @@
 package mk.springframework.petclinic.bootstrap;
 
 import mk.springframework.petclinic.model.*;
-import mk.springframework.petclinic.services.OwnerService;
-import mk.springframework.petclinic.services.PetTypeService;
-import mk.springframework.petclinic.services.SpecialityService;
-import mk.springframework.petclinic.services.VetService;
+import mk.springframework.petclinic.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,15 +15,17 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     @Autowired // there is no need to @Autowired annotation here actually.
     public DataLoader(OwnerService ownerService, VetService vetService,
                       PetTypeService petTypeService,
-                      SpecialityService specialityService) {
+                      SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -84,7 +83,6 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner1);
 
 
-
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
@@ -100,6 +98,13 @@ public class DataLoader implements CommandLineRunner {
         owner1.getPets().add(fionasPet);
 
         ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy kitty.");
+
+        visitService.save(catVisit);
 
         System.out.println("Loaded owners...");
 
